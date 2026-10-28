@@ -9,6 +9,10 @@
 PROGNAME="$(basename "$0")"
 usuario=""
 num_procesos=""
+lista=""
+aux=""
+procesos=""
+opcion_num=""
 
 function error_exit() {
 
@@ -78,7 +82,31 @@ while [[ $1 != "" ]]; do
 done
 
 #Programa Principal y Lógica del programa
-#lsof -u usuario| awk '{print $2}' |sort -n | uniq | tail -n +2
-# Para coger el porcentaje se usa el comando ps -q (num_proceso) --no-header | awk '{print $3}'
-#Peguntar mañana a Jonay como hacerlo pq no tengo ni puta idea
+# lsof | awk '{print $2}' |sort -n | uniq | tail -n +2
+# Para coger el porcentaje se usa el comando ps -q (num_procesos) --no-header | awk '{print $3}'
+
+if [[ -z $num_procesos ]]; then
+    opcion_num=""
+else
+    opcion_num="head -n $num_procesos"
+fi
+
+if [[ -z $usuario ]]; then
+    opcion_usuario="" 
+else
+    opcion_usuario="-u $usuario"
+fi
+# En este caso para que se sepa el usuario, comprobamos que si no hay usuario nos muestre los procesos de todos haciendo la variable opcion_usuario vacia
+# Si la opcio_usuario no lo está como deberemos hacer que se muestren los procesos de los usuarios y en la variable lista añadir al comando la opción
+# -u $usuario(variable que antes guardaba el usuario) para que lo muestre por pantalla al ejecutar el script
+echo "PID -> %CPU"
+lista=$(lsof $opcion_usuario | awk '{print $2}' |sort -n | uniq | tail -n +2 | $opcion_num )
+for aux in $lista; do
+    procesos=$(ps -aux -q $aux --no-header | awk '{print $3}')
+    echo "$aux -> $procesos"
+done
+# Creamos una variable donde guardaremos el comando que nos muestra la información del PID, aux es una variable auxiliar que recorrerá el comando
+# que hemos puesto anteriormente y luego crearemos otra variable que ejecutará un comando que nos dará el % de CPU de cada PID, al final volvemos
+# a guardar ese comando en una variable y luego lo mostraremos por pantalla con 'echo'.
+
 
