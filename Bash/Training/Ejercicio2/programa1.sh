@@ -14,7 +14,8 @@ PIDS=""
 aux=""
 procesos=""
 opcion_num=""
-comando_sort=""
+comando_sort="sort -k 2 -n"
+Salida=""
 
 function error_exit() {
 
@@ -28,8 +29,23 @@ function error_exit() {
     exit 1
 }
 
+function fichero_existe() {
+
+    respuesta=""
+
+    if [[ -f $1 ]]; then
+        echo "El fichero existe, desea sobreescribirlo [S/N]"   
+        read respuesta
+        if [[ ${respuesta} != "S" ]]; then
+            echo "El fichero abortado"
+            exit 2
+        fi
+
+    fi
+}
+
 function print_help() {
-    echo "./programa1.sh [-h] [-u | --user usuario] [-f | --first n]"
+    echo "./programa1.sh [-h] [-u | --user usuario] [-p | --primeros n] [-f | --fichero]"
 }
 
 function usuario_existe() {
@@ -40,7 +56,7 @@ function usuario_existe() {
 }
 
 function nombre_existe(){
-    name=$(ps -aux -q $1 | awk '{print $11}')
+    name=$(ps -aux -q $1 --no-header | awk '{print $11}')
     if [[ -z "$name" ]]; then
         echo "N/A"
     else
@@ -50,7 +66,7 @@ function nombre_existe(){
 
 function cpu_existe(){
 
-    cpu=$(ps -aux -q $1 | awk '{print $3}')
+    cpu=$(ps -aux -q $1 --no-header | awk '{print $3}')
 
     if [[ -z "$cpu" ]]; then
         echo "N/A"
@@ -80,7 +96,7 @@ while [[ $1 != "" ]]; do
 
     ;;
 
-    -f | --first )
+    -p | --primeros )
         shift
         if [[ $1 == "" || $1 == -* ]]; then
             error_exit "Falta un número"
@@ -93,10 +109,20 @@ while [[ $1 != "" ]]; do
         shift   
     ;;
     -s | --sort )
-        comando_sort=$(sort -k 3 -nr)  #Ordena la tercera columna que es el %CPU de mayor a menor
+        comando_sort="sort -k 3 -nr"  #Ordena la tercera columna que es el %CPU de mayor a menor
         shift
     ;;
+    -f | --fichero )
+        shift
 
+        if [[ $1 == "" || $1 == -* ]]; then
+            error_exit "Falta el fichero"
+        fi
+
+        fichero_existe $1
+        Salida=$1
+        shift
+    ;;
     -* )
     error_exit "No se reconoce la opción"
     ;;
@@ -126,14 +152,25 @@ fi
 # En este caso para que se sepa el usuario, comprobamos que si no hay usuario nos muestre los procesos de todos haciendo la variable opcion_usuario vacia
 # Si la opcio_usuario no lo está como deberemos hacer que se muestren los procesos de los usuarios y en la variable lista añadir al comando la opción
 # -u $usuario(variable que antes guardaba el usuario) para que lo muestre por pantalla al ejecutar el script
-printf ${FORMATO_PRINT} "Nombre" "PID" "%CPU"
+
 PIDS=$(lsof ${opcion_usuario} | awk '{print $2}' | sort -n | uniq | tail -n +2 | ${opcion_num})
-for aux in $PIDS; do
+
+if [[ -z ${Salida} ]]; then
+    printf ${FORMATO_PRINT} "Nombre" "PID" "%CPU"
+    for aux in $PIDS; do
+
+        printf ${FORMATO_PRINT} $(nombre_existe ${aux}) ${aux} $(cpu_existe ${aux})
+
+    done | ${comando_sort}
+
+else
+    printf ${FORMATO_PRINT} "Nombre" "PID" "%CPU" > ${Salida} 
+    for aux in $PIDS; do
 
     printf ${FORMATO_PRINT} $(nombre_existe ${aux}) ${aux} $(cpu_existe ${aux})
 
-done | ${comando_sort} 
-
+    done | ${comando_sort} >> ${Salida}
+fi
 #El printf guarda todas las cadenas en el bufer de la memoria y las suelta todas a la vez, al estar el comando sort se ordenan
 # Creamos una variable donde guardaremos el comando que nos muestra la información del PID, aux es una variable auxiliar que recorrerá el comando
 # que hemos puesto anteriormente y luego crearemos otra variable que ejecutará un comando que nos dará el % de CPU de cada PID, al final volvemos

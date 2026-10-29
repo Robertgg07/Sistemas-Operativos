@@ -1,0 +1,130 @@
+                                  Nombre|       PID|      %CPU|
+                /usr/lib/systemd/systemd|      2700|       0.0|
+                                (sd-pam)|      2711|       0.0|
+                    /usr/bin/dbus-daemon|      2731|       0.0|
+                       /usr/bin/pipewire|      2732|       0.0|
+           /usr/bin/gnome-keyring-daemon|      2736|       0.0|
+                    /usr/bin/mpris-proxy|      2737|       0.0|
+                    /usr/bin/wireplumber|      2748|       0.0|
+                       /usr/bin/pipewire|      2752|       0.0|
+                 /usr/bin/pipewire-pulse|      2753|       0.0|
+        /usr/libexec/gdm-wayland-session|      2778|       0.0|
+  /usr/libexec/gnome-session-init-worker|      2832|       0.0|
+        /usr/libexec/xdg-document-portal|      2872|       0.0|
+       /usr/libexec/xdg-permission-store|      2906|       0.0|
+              /usr/libexec/gcr-ssh-agent|      3000|       0.0|
+          /usr/libexec/gnome-session-ctl|      3001|       0.0|
+                      /usr/bin/ssh-agent|      3002|       0.0|
+                      /usr/libexec/gvfsd|      3014|       0.0|
+                 /usr/libexec/gvfsd-fuse|      3028|       0.0|
+      /usr/libexec/gnome-session-service|      3032|       0.0|
+                    /usr/bin/gnome-shell|      3066|      14.1|
+        /usr/libexec/at-spi-bus-launcher|      3150|       0.0|
+                    /usr/bin/dbus-daemon|      3157|       0.0|
+          /usr/libexec/at-spi2-registryd|      3159|       0.0|
+/usr/libexec/gnome-shell-calendar-server|      3178|       0.0|
+  /usr/libexec/evolution-source-registry|      3188|       0.0|
+                            /usr/bin/gjs|      3190|       0.0|
+                    /usr/bin/ibus-daemon|      3198|       0.0|
+          /usr/libexec/gsd-a11y-settings|      3202|       0.0|
+                  /usr/libexec/gsd-color|      3203|       0.0|
+               /usr/libexec/gsd-datetime|      3208|       0.0|
+           /usr/libexec/gsd-housekeeping|      3217|       0.0|
+               /usr/libexec/gsd-keyboard|      3218|       0.0|
+             /usr/libexec/gsd-media-keys|      3225|       0.0|
+                  /usr/libexec/gsd-power|      3226|       0.0|
+    /usr/libexec/gsd-print-notifications|      3227|       0.0|
+                 /usr/libexec/gsd-rfkill|      3235|       0.0|
+      /usr/libexec/gsd-screensaver-proxy|      3240|       0.0|
+                /usr/libexec/gsd-sharing|      3241|       0.0|
+              /usr/libexec/gsd-smartcard|      3244|       0.0|
+                  /usr/libexec/gsd-sound|      3251|       0.0|
+         /usr/libexec/gsd-usb-protection|      3255|       0.0|
+    /usr/libexec/gsd-disk-utility-notify|      3259|       0.0|
+/usr/libexec/evolution-data-server/evolution-alarm-notify|      3262|       0.0|
+                   /usr/libexec/gsd-wwan|      3266|       0.0|
+                /usr/bin/update-notifier|      3294|       0.0|
+                 /usr/libexec/ibus-dconf|      3344|       0.0|
+        /usr/libexec/ibus-extension-gtk3|      3346|       0.0|
+                /usr/libexec/ibus-portal|      3354|       0.0|
+                /usr/libexec/gsd-printer|      3394|       0.0|
+                            /usr/bin/gjs|      3396|       0.0|
+              /usr/libexec/localsearch-3|      3408|       0.0|
+         /usr/libexec/xdg-desktop-portal|      3411|       0.0|
+   /usr/libexec/xdg-desktop-portal-gnome|      3477|       0.0|
+                 /usr/libexec/goa-daemon|      3481|       0.0|
+/usr/libexec/gvfs-udisks2-volume-monitor|      3484|       0.0|
+       /usr/libexec/goa-identity-service|      3499|       0.0|
+ /usr/libexec/evolution-calendar-factory|      3508|       0.0|
+    /usr/libexec/gvfs-goa-volume-monitor|      3509|       0.0|
+/usr/libexec/gvfs-gphoto2-volume-monitor|      3518|       0.0|
+    /usr/libexec/gvfs-mtp-volume-monitor|      3523|       0.0|
+    /usr/libexec/gvfs-afc-volume-monitor|      3532|       0.0|
+/usr/libexec/evolution-addressbook-factory|      3537|       0.0|
+         /usr/libexec/ibus-engine-simple|      3561|       0.0|
+             /usr/libexec/gvfsd-metadata|      3702|       0.0|
+              /usr/libexec/dconf-service|      3735|       0.0|
+                /usr/libexec/gvfsd-trash|      3782|       0.0|
+     /usr/libexec/xdg-desktop-portal-gtk|      3930|       0.0|
+/snap/snapd-desktop-integration/391/usr/bin/user-session-helper|      3972|       0.0|
+/snap/snapd-desktop-integration/391/usr/bin/snapd-desktop-integration|      4034|       0.0|
+      /snap/code/273/usr/share/code/code|      4142|       2.6|
+      /snap/code/273/usr/share/code/code|      4144|       0.0|
+      /snap/code/273/usr/share/code/code|      4145|       0.0|
+/snap/code/273/usr/share/code/chrome_crashpad_handler|      4160|       0.0|
+                       /usr/bin/Xwayland|      4163|       1.8|
+              /usr/libexec/gsd-xsettings|      4168|       0.0|
+          /usr/libexec/mutter-x11-frames|      4173|       0.3|
+      /snap/code/273/usr/share/code/code|      4216|       0.0|
+                   /usr/libexec/ibus-x11|      4222|       0.0|
+      /snap/code/273/usr/share/code/code|      4269|       9.7|
+      /snap/code/273/usr/share/code/code|      4311|       6.0|
+      /snap/code/273/usr/share/code/code|      4393|       0.0|
+      /snap/code/273/usr/share/code/code|      4411|       0.2|
+      /snap/code/273/usr/share/code/code|      4427|       0.5|
+      /snap/code/273/usr/share/code/code|      4441|       0.0|
+      /snap/code/273/usr/share/code/code|      4442|       0.0|
+                                   dconf|      4500|       0.0|
+/snap/code/273/usr/share/code/resources/app/node_modules.asar.unpacked/@github/copilot-sdk-linux-x64/prebuilds/linux-x64/copilot-runtime|      4510|       0.0|
+                           /usr/bin/bash|      4612|       0.0|
+      /snap/code/273/usr/share/code/code|      4894|       0.0|
+      /snap/code/273/usr/share/code/code|      6648|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      6750|       2.2|
+/snap/firefox/8763/usr/lib/firefox/crashhelper|      6827|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      6921|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      6924|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      6961|       0.2|
+/snap/firefox/8763/usr/lib/firefox/firefox|      6971|       0.0|
+                           /usr/bin/snap|      7010|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      7173|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      7553|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|      7555|       0.8|
+                 /usr/bin/gnome-calendar|     10989|       0.0|
+                       /usr/bin/seahorse|     11116|       0.0|
+                 /usr/libexec/gvfsd-http|     11223|       0.0|
+                         /usr/bin/ptyxis|     11264|       0.3|
+               /usr/libexec/ptyxis-agent|     11296|       0.0|
+                           /usr/bin/bash|     11344|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|     12787|       1.5|
+/snap/firefox/8763/usr/lib/firefox/firefox|     12820|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|     12926|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|     12969|       0.0|
+/snap/firefox/8763/usr/lib/firefox/firefox|     13020|       0.0|
+               /usr/libexec/gvfsd-recent|     13116|       0.0|
+              /usr/libexec/gvfsd-network|     13117|       0.0|
+                /usr/libexec/gvfsd-dnssd|     13129|       0.0|
+                 /usr/libexec/gvfsd-wsdd|     13136|       0.0|
+                                 python3|     13141|       0.0|
+                      /usr/bin/ssh-agent|     13332|       0.0|
+                                     man|     24870|       0.0|
+                                   pager|     24879|       0.0|
+                                     gjs|     26036|       0.0|
+                               /bin/bash|     37132|       0.0|
+                                     N/A|     37150|       N/A|
+                                     N/A|     37151|       N/A|
+                                     N/A|     37152|       N/A|
+                                     N/A|     37153|       N/A|
+                                     N/A|     37154|       N/A|
+                                     N/A|     37155|       N/A|
+                                     N/A|     37156|       N/A|
+                                     N/A|     37157|       N/A|
