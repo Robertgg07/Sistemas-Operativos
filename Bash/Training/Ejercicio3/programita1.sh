@@ -1,10 +1,15 @@
 #!/bin/bash
 
 #Variables
+PROGNAME=$(basename "$0")
 usuario=""
-mayor=""
+num_procesos=""
+aux=""
+PIDS=""
+procesos_mem=""
+opcion_numero=""
+opcion_usuario=""
 #Constantes
-
 #Funciones
 function print_help() {
     echo "./programa1.sh [-h] [-u | --user usuario] [-f | --first n]"
@@ -23,13 +28,13 @@ function error_exit() {
 }
 function usuario_existe(){
     id $1 > /dev/null 2>&1
-    if [[ $? != "0"]]; then
+    if [[ $? != "0" ]]; then
     error_exit "Usuario no encontrado"
     fi
 }
 
 function mayor_zero() {
-    if [[ $1 -lt "0" ]]; then
+    if [[ $1 -le "0" ]]; then
         error_exit "El número debe ser mayor a 0"
     fi
 }
@@ -58,19 +63,39 @@ while [[ $1 != "" ]]; do
                 error_exit "Falta un número"
             fi
             mayor_zero $1
-            mayor=$1
+            num_procesos=$1
             shift
         ;;
 
         -* )
+        error_exit "No se reconoce la accion"
         ;;
 
         * )
+        error_exit "No se reconoce el argumento"
         ;;
+    esac
 done
 
 
 
 #Programa Principal
+if [[ -z $num_procesos ]]; then
+    opcion_numero="cat"
+else
+    opcion_numero="head -n $num_procesos"
+fi
+
+if [[ -z $usuario ]]; then
+    opcion_usuario=""
+else
+    opcion_usuario="-u $usuario"
+fi
 
 
+echo "PID --> MEMORIA (%)"
+PIDS=$(ps ${opcion_usuario} | awk '{print $2}' | sort -n  |uniq | ${opcion_numero})
+for aux in $PIDS; do
+    procesos_mem=$(ps -aux -q $aux --no-header | awk '{print $4}')
+    echo "${aux} --> ${procesos_mem} (%)"
+done
