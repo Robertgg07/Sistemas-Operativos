@@ -6,18 +6,27 @@
 PROGNAME="$(basename "$0")"
 user=""
 num=5
-FORMATOPRINT="%20s|%20s|%20s|\n"
+FORMATOPRINT="%10s|%10s|%10s|\n"
 #Funciones
 function error_exit() {
 
     echo "${PROGNAME}: ${1:-Error desconocido}" >&2
     exit 1
-
 }
+
+function lsof_instalado() {
+    type lsof > /dev/null 2>&1 
+
+    if [[ $? != 0 ]]; then
+
+        error_exit "lsof no está instalado"
+    fi
+} 
 
 function print_help() {
     echo "Uso: ./script.sh [-h] [-u | --user usuario] [-n numero]"
 }
+
 function user_exist() {
     id $1 > /dev/null 2>&1
     if [[ $? != "0" ]]; then
@@ -25,42 +34,36 @@ function user_exist() {
     fi
 }
 
-function caso_estandar() {
+function caso_estandar_nuevo() {
 
     printf "$FORMATOPRINT" "PID" "%MEM" "COMMAND"
 
-    CASOESTANDAR=$(ps -aux | sort -k4 -nr | tail -n +2 | head -n "$num" | awk '{print $2}')
+    procesos=$(ps -aux --no-header | sort -k4 -nr | awk '{print $2 "|" $4 "|" $11}' | head -n 5)
+    
+    for proceso in $procesos; do
 
-    for aux in $CASOESTANDAR; do
-        pid=$(ps -aux -q "$aux" | tail -n 1 | awk '{print $2}')
-        mem=$(ps -aux -q "$aux" | tail -n 1 | awk '{print $4}')
-        command=$(ps -aux -q "$aux" | tail -n 1 | awk '{print $11}')
-
+        pid=$(echo $proceso | cut -d "|" -f 1)
+        mem=$(echo $proceso | cut -d "|" -f 2)        
+        command=$(echo $proceso | cut -d "|" -f 3)
+    
         printf "$FORMATOPRINT" "$pid" "$mem" "$command"
     done
-    exit 0
 }
 
-function caso_U() {
+function caso_usuario_nuevo() {
 
     printf "$FORMATOPRINT" "PID" "%MEM" "COMMAND"
 
-    CASOUSUARIO=$(ps -aux -U "$user" | sort -k4 -nr | tail -n +2 | head -n "$num" | awk '{print $2}')
+    procesos=$(ps -aux -U $USER --no-header | sort -k4 -nr | awk '{print $2 "|" $4 "|" $11}' | head -n $num)
 
-    for aux in $CASOUSUARIO; do
+    for proceso in $procesos; do
 
-        datos=$(ps -aux -U "$user" | awk -v pid="$aux" '$2 == pid')
-
-        pid=$(echo "$datos" | awk '{print $2}')
-        mem=$(echo "$datos" | awk '{print $4}')
-        command=$(echo "$datos" | awk '{print $11}')
-
+        pid=$(echo $proceso | cut -d "|" -f 1)
+        mem=$(echo $proceso | cut -d "|" -f 2)        
+        command=$(echo $proceso | cut -d "|" -f 3)
+    
         printf "$FORMATOPRINT" "$pid" "$mem" "$command"
-
     done
-
-    exit 0
-
 }
 
 function is_positive() {
@@ -105,10 +108,10 @@ while [[ $1 != "" ]]; do
     esac
 done
 
-if [[ "$user" != "" ]]; then
-    caso_U
+if [[ ! -z "$user" ]]; then
+    caso_usuario_nuevo
 else
-    caso_estandar
+    caso_estandar_nuevo
 fi
 
 exit 0

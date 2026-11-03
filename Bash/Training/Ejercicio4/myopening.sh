@@ -30,6 +30,7 @@ function valid_user() {
 function caso_estandar() {
     printf $FORMATOPRINT "COMMAND" "PID"
     for aux in $CASOESTANDAR; do
+    
         command=$(echo $aux | cut -d "." -f 1)
         pid=$(echo $aux | cut -d "." -f 2)
         printf $FORMATOPRINT "$command" "$pid"
